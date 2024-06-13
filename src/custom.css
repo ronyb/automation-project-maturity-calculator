@@ -1,0 +1,24 @@
+/* src/custom.css */
+
+.btn-light-green {
+    background-color: #90ee90;
+    border-color: #90ee90;
+    color: #fff;
+  }
+  
+  .btn-light-green:hover {
+    background-color: #76d976;
+    border-color: #76d976;
+  }
+  
+  .btn-light-red {
+    background-color: #ffcccb;
+    border-color: #ffcccb;
+    color: #fff;
+  }
+  
+  .btn-light-red:hover {
+    background-color: #ff9999;
+    border-color: #ff9999;
+  }
+  
