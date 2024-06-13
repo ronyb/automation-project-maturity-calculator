@@ -1,3 +1,4 @@
+// src/components/Question.tsx
 import React from 'react';
 
 interface QuestionProps {
@@ -8,9 +9,13 @@ interface QuestionProps {
 
 const Question: React.FC<QuestionProps> = ({ question, answers, handleAnswer }) => (
   <div>
-    <h1>{question}</h1>
+    <h1 className="h5 mb-4">{question}</h1>
     {answers.map((answer, index) => (
-      <button key={index} onClick={() => handleAnswer(answer)}>
+      <button
+        key={index}
+        className="btn btn-primary me-2 mb-2"
+        onClick={() => handleAnswer(answer)}
+      >
         {answer}
       </button>
     ))}
