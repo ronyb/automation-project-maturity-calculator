@@ -1,101 +1,92 @@
 // src/components/UserForm.tsx
 import React, { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 
 interface UserFormProps {
   onSubmit: (formData: { fullName: string; role: string; company: string; email: string }) => void;
+  onSkip: () => void; // Add the onSkip prop
 }
 
-const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
-  const [formData, setFormData] = useState({ fullName: '', role: '', company: '', email: '' });
-  const [errors, setErrors] = useState({ fullName: '', role: '', company: '', email: '' });
+const UserForm: React.FC<UserFormProps> = ({ onSubmit, onSkip }) => {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    role: '',
+    company: '',
+    email: ''
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const validateForm = () => {
-    let valid = true;
-    const newErrors = { fullName: '', role: '', company: '', email: '' };
-
-    if (!formData.fullName) {
-      newErrors.fullName = 'שם מלא נדרש';
-      valid = false;
-    }
-    if (!formData.role) {
-      newErrors.role = 'תפקיד נדרש';
-      valid = false;
-    }
-    if (!formData.company) {
-      newErrors.company = 'חברה נדרשת';
-      valid = false;
-    }
-    if (!formData.email) {
-      newErrors.email = 'אימייל נדרש';
-      valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'אימייל לא תקין';
-      valid = false;
-    }
-
-    setErrors(newErrors);
-    return valid;
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      onSubmit(formData);
-    }
+    onSubmit(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="text-end">
-      <div className="mb-3">
-        <label className="form-label">שם מלא</label>
-        <input
+    <Form onSubmit={handleSubmit} className="text-end">
+      
+      <div>
+        <p>תוהים איפה אתם עומדים בעבודה על פיתוח פרויקט הבדיקות האוטומטיות שלכם?</p>
+        <p>מחשבון זה שפיתחנו על סמך הניסיון שצברנו מעשרות פרויקטי אוטומציה שהובלנו במרוצת השנים, יאפשר לכם לקבל הערכה של מידת הבשלות והבגרות של פרויקט האוטומציה בארגון שלכם.</p>
+        <p>נא מלאו את הפרטים שלכם בטופס שלמטה, ונתחיל בשאלון קצר של 20 שאלות שבסופו תקבלו הערכה עבור פרויקט האוטומציה שלכם.</p>
+      </div>
+      <br/><br/>
+      <Form.Group controlId="formFullName">
+        <Form.Label>שם מלא</Form.Label>
+        <Form.Control
           type="text"
-          className={`form-control ${errors.fullName ? 'is-invalid' : ''}`}
           name="fullName"
           value={formData.fullName}
           onChange={handleChange}
+          required
         />
-        {errors.fullName && <div className="invalid-feedback">{errors.fullName}</div>}
-      </div>
-      <div className="mb-3">
-        <label className="form-label">תפקיד</label>
-        <input
+      </Form.Group>
+      <Form.Group controlId="formRole">
+        <Form.Label>תפקיד</Form.Label>
+        <Form.Control
           type="text"
-          className={`form-control ${errors.role ? 'is-invalid' : ''}`}
           name="role"
           value={formData.role}
           onChange={handleChange}
+          required
         />
-        {errors.role && <div className="invalid-feedback">{errors.role}</div>}
-      </div>
-      <div className="mb-3">
-        <label className="form-label">חברה</label>
-        <input
+      </Form.Group>
+      <Form.Group controlId="formCompany">
+        <Form.Label>חברה</Form.Label>
+        <Form.Control
           type="text"
-          className={`form-control ${errors.company ? 'is-invalid' : ''}`}
           name="company"
           value={formData.company}
           onChange={handleChange}
+          required
         />
-        {errors.company && <div className="invalid-feedback">{errors.company}</div>}
-      </div>
-      <div className="mb-3">
-        <label className="form-label">אימייל</label>
-        <input
+      </Form.Group>
+      <Form.Group controlId="formEmail">
+        <Form.Label>מייל</Form.Label>
+        <Form.Control
           type="email"
-          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
           name="email"
           value={formData.email}
           onChange={handleChange}
+          required
         />
-        {errors.email && <div className="invalid-feedback">{errors.email}</div>}
-      </div>
-      <button type="submit" className="btn btn-primary">התחל את החידון</button>
-    </form>
+      </Form.Group>
+      <br/>
+      <Button variant="primary" type="submit" className="mt-3 ml-3 mr-3">
+        בואו נתחיל
+      </Button>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <Button variant="secondary" className="mt-3 mr-3" onClick={onSkip}>
+        לדלג ישר לשאלון
+      </Button>
+      
+    </Form>
   );
 };
 

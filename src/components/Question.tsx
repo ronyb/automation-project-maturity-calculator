@@ -18,7 +18,7 @@ const Question: React.FC<QuestionProps> = ({ question, answers, handleAnswer, cu
 
   return (
     <div className="text-end">
-      <h2 className="h6 mb-4 text-center">שאלה {currentQuestion + 1}/{totalQuestions}</h2>
+      <h2 className="h6 mb-4 text-center">שאלה {currentQuestion + 1} מתוך {totalQuestions}</h2>
       <h1 className="h5 mb-4">{question}</h1>
       <div className="d-grid gap-2">
         {answers.map((answer, index) => (

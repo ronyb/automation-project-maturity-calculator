@@ -4,6 +4,7 @@ import { questions } from './questions';
 import QuestionComponent from './components/Question';
 import Summary from './components/Summary';
 import UserForm from './components/UserForm';
+import Footer from './components/Footer'; // Import the Footer component
 import emailjs from 'emailjs-com';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './custom.css'; // Import custom CSS
@@ -43,6 +44,14 @@ const App: React.FC = () => {
     }
   };
 
+  const handleStartOver = () => {
+    setCurrentQuestion(0);
+    setAnswers(Array(questions.length).fill(null));
+    setScore(0);
+    setIsSummary(false);
+    setIsFormSubmitted(false);
+  };
+
   const sendEmail = (answers: string[]) => {
     const templateParams = {
       answers: answers.join(', '),
@@ -62,6 +71,10 @@ const App: React.FC = () => {
     setIsFormSubmitted(true);
   };
 
+  const handleSkip = () => {
+    setIsFormSubmitted(true);
+  };
+
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light p-4 rtl">
       <div className="card w-100" style={{ maxWidth: '600px' }}>
@@ -69,7 +82,7 @@ const App: React.FC = () => {
           <h1 className="mb-4">מחשבון בגרות פרויקט אוטומציה</h1>
           {isFormSubmitted ? (
             isSummary ? (
-              <Summary questions={questions} answers={answers} score={score} />
+              <Summary questions={questions} answers={answers} score={score} onStartOver={handleStartOver} />
             ) : (
               <QuestionComponent
                 question={questions[currentQuestion].question}
@@ -81,10 +94,11 @@ const App: React.FC = () => {
               />
             )
           ) : (
-            <UserForm onSubmit={handleFormSubmit} />
+            <UserForm onSubmit={handleFormSubmit} onSkip={handleSkip} />
           )}
         </div>
       </div>
+      <Footer /> {/* Add the Footer component */}
     </div>
   );
 };
