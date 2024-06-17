@@ -1,6 +1,7 @@
 // src/components/Summary.tsx
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import './Summary.css';
 
 interface SummaryProps {
   questions: { question: string; answers: string[] }[];
@@ -31,7 +32,7 @@ const Summary: React.FC<SummaryProps> = ({ questions, answers, score, onStartOve
         רוצה להתחיל מחדש
       </Button>
       <br/><br/>
-      <ul className="list-group">
+      <ul className="list-group summary-list">
         {questions.map((q, index) => (
           <li key={index} className="list-group-item">
             <strong>{index+1}. {q.question}</strong>
