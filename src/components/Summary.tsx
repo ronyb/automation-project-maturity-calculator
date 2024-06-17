@@ -12,10 +12,10 @@ interface SummaryProps {
 const Summary: React.FC<SummaryProps> = ({ questions, answers, score, onStartOver }) => {
   
   const getEmojiAndMessageToUserForScore = (score: number) => {
-    if (score <= 49) return { message: 'נראה שרק התחלתם ויש עוד הרבה עבודה לעשות', emoji: '😕' }; 
-    if (score <= 69) return { message: 'רואים שכבר עשיתם עבודה, אבל יש עוד לא מעט עבודה לפניכם', emoji: '😏' };
-    if (score <= 90) return { message: 'נראה שמצבכם לא רע בכלל, אבל תמיד יש עוד מה להוסיף ולשפר', emoji: '😊' };
-    return { message: 'מושלם! נראה שכבר דאגתם להכל והפרויקט מתקתק', emoji: '😃' };
+    if (score <= 49) return { message: 'נראה שרק התחלתם ויש עוד הרבה עבודה לעשות.', emoji: '😕' }; 
+    if (score <= 69) return { message: 'רואים שכבר עשיתם עבודה, אבל יש עוד לא מעט עבודה לפניכם.', emoji: '😏' };
+    if (score <= 90) return { message: 'נראה שמצבכם לא רע בכלל. אבל הרי תמיד יש עוד מה להוסיף ולשפר.', emoji: '🙂' };
+    return { message: 'מושלם! נראה שכבר דאגתם כמעט להכל והפרויקט מתקתק.', emoji: '🤩' };
   };
 
   const { message, emoji } = getEmojiAndMessageToUserForScore(score);

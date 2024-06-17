@@ -79,7 +79,10 @@ const App: React.FC = () => {
     <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light p-4 rtl">
       <div className="card w-100" style={{ maxWidth: '600px' }}>
         <div className="card-body text-center">
-          <h1 className="mb-4">מחשבון בגרות פרויקט אוטומציה</h1>
+        
+          <img src={`${process.env.PUBLIC_URL}/matrix_topq.png`} alt="Matrix Top-Q" className="logo" /><br/><br/>
+          <h1 className="mb-4 h2">מחשבון בגרות פרויקט אוטומציה</h1>
+
           {isFormSubmitted ? (
             isSummary ? (
               <Summary questions={questions} answers={answers} score={score} onStartOver={handleStartOver} />
@@ -98,7 +101,7 @@ const App: React.FC = () => {
           )}
         </div>
       </div>
-      <Footer /> {/* Add the Footer component */}
+      {/* <Footer />  Add the Footer component */}
     </div>
   );
 };
