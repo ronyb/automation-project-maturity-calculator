@@ -1,6 +1,7 @@
 // src/components/UserForm.tsx
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import emailjs from 'emailjs-com';
 
 interface UserFormProps {
   onSubmit: (formData: { fullName: string; role: string; company: string; email: string }) => void;
@@ -26,6 +27,25 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit, onSkip }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(formData);
+  };
+
+  const sendEmail = () => {
+    const templateParams = {
+      message: "<b>Hello</b> world!",
+      to_name: "Top-Q Team",
+      from_name: "Website visitor X",
+      to_email: 'rony.byalsky@gmail.com; ronen.byalsky@top-q.co.il',
+    };
+
+    console.log("Going to send email...");
+    console.log(templateParams);
+
+    emailjs.send('service_rq9aowp', 'template_clyv9qc', templateParams, 'ApFIQHrCQrTasqTMl')
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+      }, (err) => {
+        console.error('FAILED...', err);
+      });
   };
 
   return (
@@ -85,7 +105,10 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit, onSkip }) => {
       <Button variant="secondary" className="mt-3 mr-3" onClick={onSkip}>
         לדלג ישר לשאלון
       </Button>
-      
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <Button variant="secondary" className="mt-3 mr-3" onClick={sendEmail}>
+        Send Email
+      </Button>
     </Form>
   );
 };

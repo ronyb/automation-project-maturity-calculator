@@ -58,7 +58,10 @@ const App: React.FC = () => {
       to_email: 'your-email@example.com',
     };
 
-    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams, 'YOUR_USER_ID')
+    console.log("Going to send email...");
+    console.log(templateParams);
+
+    emailjs.send('service_rq9aowp', 'template_clyv9qc', templateParams, 'ApFIQHrCQrTasqTMl')
       .then((response) => {
         console.log('SUCCESS!', response.status, response.text);
       }, (err) => {
