@@ -1,17 +1,59 @@
 // src/components/Summary.tsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import './Summary.css';
+import ClientDetails from '../ClientDetails';
+import emailjs from 'emailjs-com';
 
 interface SummaryProps {
   questions: { question: string; answers: string[] }[];
   answers: string[];
   score: number;
-  onStartOver: () => void; // Add onStartOver prop
+  clientDetails: ClientDetails;
+  onStartOver: () => void;
 }
 
-const Summary: React.FC<SummaryProps> = ({ questions, answers, score, onStartOver }) => {
+const Summary: React.FC<SummaryProps> = ({ questions, answers, score, clientDetails, onStartOver }) => {
   
+  const sendEmail = () => {
+    
+    let clientDetailsStr = '<div dir="rtl">';
+    clientDetailsStr += `שם מלא: ${clientDetails.fullName}<br/>`;
+    clientDetailsStr += `תפקיד: ${clientDetails.role}<br/>`;
+    clientDetailsStr += `חברה: ${clientDetails.company}<br/>`;
+    clientDetailsStr += `מייל: ${clientDetails.email}<br/><br/>`;
+
+    let answersStr = answers.map((str, index) => `${index+1}: ${str}`).join("<br/>");
+
+    let messageBody = clientDetailsStr;
+    messageBody += "ציון: " + score + "<br/><br/>";
+    messageBody += answersStr;
+    messageBody += "</div>"
+
+    console.log(messageBody);
+    
+    const templateParams = {
+      from_name: clientDetails.fullName,
+      company: clientDetails.company,
+      message: messageBody,
+      to_email: 'ronen.byalsky@top-q.co.il; itai.agmon@top-q.co.il;',
+    };
+
+    console.log("Going to send email...");
+    console.log(templateParams);
+
+    emailjs.send('service_rq9aowp', 'template_clyv9qc', templateParams, 'ApFIQHrCQrTasqTMl')
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+      }, (err) => {
+        console.error('FAILED...', err);
+      });
+  };
+
+  useEffect(() => {
+    sendEmail();
+  }, []); // Empty dependency array ensures this runs only once after the initial render
+
   const getEmojiAndMessageToUserForScore = (score: number) => {
     if (score < 50) return { message: 'נראה שרק התחלתם ויש עוד הרבה עבודה לעשות.', emoji: '😕' }; 
     if (score < 70) return { message: 'רואים שכבר עשיתם עבודה, אבל יש עוד לא מעט עבודה לפניכם.', emoji: '😏' };

@@ -12,7 +12,6 @@ interface QuestionProps {
 
 const Question: React.FC<QuestionProps> = ({ question, answers, handleAnswer, currentQuestion, totalQuestions, handlePrevious }) => {
   const handleAnswerClick = (answer: string) => {
-    console.log(answer);
     handleAnswer(answer);
   };
 

@@ -4,42 +4,51 @@ import { questions } from './questions';
 import QuestionComponent from './components/Question';
 import Summary from './components/Summary';
 import UserForm from './components/UserForm';
-import Footer from './components/Footer'; // Import the Footer component
 import emailjs from 'emailjs-com';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './custom.css'; // Import custom CSS
+import './custom.css';
+import ClientDetails from './ClientDetails';
 
 const App: React.FC = () => {
+
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const [answers, setAnswers] = useState<string[]>(Array(questions.length).fill(null));
   const [score, setScore] = useState<number>(0);
   const [isSummary, setIsSummary] = useState<boolean>(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false);
+  const [clientDetails, setClientDetails] = useState<ClientDetails>({
+    fullName: 'unknown name',
+    role: 'unknown role',
+    company: 'unknown company',
+    email: 'unknown email'
+  });
 
   const handleAnswer = (answer: string) => {
+    
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answer;
     setAnswers(newAnswers);
 
-    // Update score
     if (answer === questions[currentQuestion].answers[0]) {
-      setScore(score + 5); // Assuming the first answer is always 'Yes'
+      setScore(score + 5);
     }
 
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
-    } else {
+    }
+
+    else {
       setIsSummary(true);
-      sendEmail(newAnswers); // Call function to send email here
     }
   };
 
   const handlePrevious = () => {
     if (currentQuestion > 0) {
-      // Decrease score if the user is going back from a 'Yes' answer
+      
       if (answers[currentQuestion - 1] === questions[currentQuestion - 1].answers[0]) {
         setScore(score - 5);
       }
+
       setCurrentQuestion(currentQuestion - 1);
     }
   };
@@ -50,27 +59,18 @@ const App: React.FC = () => {
     setScore(0);
     setIsSummary(false);
     setIsFormSubmitted(false);
+    setClientDetails({
+      fullName: 'unknown name',
+      role: 'unknown role',
+      company: 'unknown company',
+      email: 'unknown email'
+    });
   };
 
-  const sendEmail = (answers: string[]) => {
-    const templateParams = {
-      answers: answers.join(', '),
-      to_email: 'your-email@example.com',
-    };
+  
 
-    console.log("Going to send email...");
-    console.log(templateParams);
-
-    emailjs.send('service_rq9aowp', 'template_clyv9qc', templateParams, 'ApFIQHrCQrTasqTMl')
-      .then((response) => {
-        console.log('SUCCESS!', response.status, response.text);
-      }, (err) => {
-        console.error('FAILED...', err);
-      });
-  };
-
-  const handleFormSubmit = (formData: { fullName: string; role: string; company: string; email: string }) => {
-    console.log('Form Data:', formData);
+  const handleClientDetailsFormSubmit = (clientDetails: { fullName: string; role: string; company: string; email: string }) => {
+    setClientDetails(clientDetails);
     setIsFormSubmitted(true);
   };
 
@@ -88,7 +88,7 @@ const App: React.FC = () => {
 
           {isFormSubmitted ? (
             isSummary ? (
-              <Summary questions={questions} answers={answers} score={score} onStartOver={handleStartOver} />
+              <Summary questions={questions} answers={answers} score={score} clientDetails={clientDetails} onStartOver={handleStartOver} />
             ) : (
               <QuestionComponent
                 question={questions[currentQuestion].question}
@@ -100,11 +100,10 @@ const App: React.FC = () => {
               />
             )
           ) : (
-            <UserForm onSubmit={handleFormSubmit} onSkip={handleSkip} />
+            <UserForm onSubmit={handleClientDetailsFormSubmit} onSkip={handleSkip} />
           )}
         </div>
       </div>
-      {/* <Footer />  Add the Footer component */}
     </div>
   );
 };
