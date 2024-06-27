@@ -1,0 +1,8 @@
+.custom-progress-bar1 {
+    height: 30px !important;
+    font-size: 1rem !important;
+}
+
+.custom-progress-bar .progress-bar {
+    line-height: 30px !important;
+}

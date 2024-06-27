@@ -1,5 +1,7 @@
 // src/components/Question.tsx
 import React from 'react';
+import { ProgressBar } from 'react-bootstrap';
+import './Question.css';
 
 interface QuestionProps {
   question: string;
@@ -11,13 +13,18 @@ interface QuestionProps {
 }
 
 const Question: React.FC<QuestionProps> = ({ question, answers, handleAnswer, currentQuestion, totalQuestions, handlePrevious }) => {
+  
+  const progressBarNow = ((currentQuestion+1) / totalQuestions) * 100;
+  
   const handleAnswerClick = (answer: string) => {
     handleAnswer(answer);
   };
 
   return (
     <div className="text-end">
-      <h2 className="h6 mb-4 text-center">שאלה {currentQuestion + 1} מתוך {totalQuestions}</h2>
+      
+      <ProgressBar now={progressBarNow} label={`שאלה ${currentQuestion + 1} מתוך ${totalQuestions}`} className="custom-progress-bar1"/>
+      <br/>
       <h1 className="h5 mb-4">{question}</h1>
       <div className="d-grid gap-2">
         {answers.map((answer, index) => (
