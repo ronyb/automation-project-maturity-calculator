@@ -70,6 +70,10 @@ const Summary: React.FC<SummaryProps> = ({ questions, answers, score, clientDeta
       <h3 className="h4 mb-4 text-center">בגרות הפרויקט שלכם: {score}% {emoji}</h3>
       <h3 className="h5 mb-4 text-center">{message}</h3>
 
+      <div className="h5 alert alert-info" role="alert">
+      לייעוץ בנושא אוטומציה מוזמנים לפנות במייל:<br/> <a href="mailto:itai.agmon@top-q.co.il">itai.agmon@top-q.co.il</a>
+      </div>
+
       <Button variant="primary" className="mt-3" onClick={onStartOver}>
         רוצה להתחיל מחדש
       </Button>
