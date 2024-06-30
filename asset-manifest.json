@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/automation-project-maturity-calculator/static/css/main.c390dc4a.css",
-    "main.js": "/automation-project-maturity-calculator/static/js/main.f262f10f.js",
+    "main.js": "/automation-project-maturity-calculator/static/js/main.c1a24dbe.js",
     "static/js/453.40d4b8c4.chunk.js": "/automation-project-maturity-calculator/static/js/453.40d4b8c4.chunk.js",
     "index.html": "/automation-project-maturity-calculator/index.html",
     "main.c390dc4a.css.map": "/automation-project-maturity-calculator/static/css/main.c390dc4a.css.map",
-    "main.f262f10f.js.map": "/automation-project-maturity-calculator/static/js/main.f262f10f.js.map",
+    "main.c1a24dbe.js.map": "/automation-project-maturity-calculator/static/js/main.c1a24dbe.js.map",
     "453.40d4b8c4.chunk.js.map": "/automation-project-maturity-calculator/static/js/453.40d4b8c4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c390dc4a.css",
-    "static/js/main.f262f10f.js"
+    "static/js/main.c1a24dbe.js"
   ]
 }
