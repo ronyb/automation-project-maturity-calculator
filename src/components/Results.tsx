@@ -1,11 +1,10 @@
-// src/components/Summary.tsx
 import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import './Summary.css';
+import './Results.css';
 import ClientDetails from '../ClientDetails';
 import emailjs from 'emailjs-com';
 
-interface SummaryProps {
+interface ResultsProps {
   questions: { question: string; answers: string[] }[];
   answers: string[];
   score: number;
@@ -13,7 +12,7 @@ interface SummaryProps {
   onStartOver: () => void;
 }
 
-const Summary: React.FC<SummaryProps> = ({ questions, answers, score, clientDetails, onStartOver }) => {
+const Results: React.FC<ResultsProps> = ({ questions, answers, score, clientDetails, onStartOver }) => {
   
   const sendEmail = () => {
     
@@ -42,12 +41,13 @@ const Summary: React.FC<SummaryProps> = ({ questions, answers, score, clientDeta
     console.log("Going to send email...");
     console.log(templateParams);
 
+    /*
     emailjs.send('service_rq9aowp', 'template_clyv9qc', templateParams, 'ApFIQHrCQrTasqTMl')
       .then((response) => {
         console.log('SUCCESS!', response.status, response.text);
       }, (err) => {
         console.error('FAILED...', err);
-      });
+      });*/
   };
 
   useEffect(() => {
@@ -93,4 +93,4 @@ const Summary: React.FC<SummaryProps> = ({ questions, answers, score, clientDeta
   );
 };
 
-export default Summary;
+export default Results;

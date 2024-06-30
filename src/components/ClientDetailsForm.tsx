@@ -1,13 +1,12 @@
-// src/components/UserForm.tsx
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
-interface UserFormProps {
+interface ClientDetailsFormProps {
   onSubmit: (formData: { fullName: string; role: string; company: string; email: string }) => void;
-  onSkip: () => void; // Add the onSkip prop
+  onSkip: () => void;
 }
 
-const UserForm: React.FC<UserFormProps> = ({ onSubmit, onSkip }) => {
+const ClientDetailsForm: React.FC<ClientDetailsFormProps> = ({ onSubmit, onSkip }) => {
   const [formData, setFormData] = useState({
     fullName: '',
     role: '',
@@ -89,4 +88,4 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit, onSkip }) => {
   );
 };
 
-export default UserForm;
+export default ClientDetailsForm;

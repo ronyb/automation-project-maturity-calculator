@@ -1,4 +1,3 @@
-// src/components/Question.tsx
 import React from 'react';
 import { ProgressBar } from 'react-bootstrap';
 import './Question.css';
@@ -28,10 +27,10 @@ const Question: React.FC<QuestionProps> = ({ question, answers, handleAnswer, cu
       <h1 className="h5 mb-4">{question}</h1>
       <div className="d-grid gap-2">
         {answers.map((answer, index) => (
+
           <button
             key={index}
             className={`btn btn-lg ${index === 0 ? 'btn-success' : 'btn-danger'}`}
-            //style={{ height: '3rem' }}
             onClick={() => handleAnswerClick(answer)}
           >
             {answer}
