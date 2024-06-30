@@ -41,13 +41,12 @@ const Results: React.FC<ResultsProps> = ({ questions, answers, score, clientDeta
     console.log("Going to send email...");
     console.log(templateParams);
 
-    /*
     emailjs.send('service_rq9aowp', 'template_clyv9qc', templateParams, 'ApFIQHrCQrTasqTMl')
       .then((response) => {
         console.log('SUCCESS!', response.status, response.text);
       }, (err) => {
         console.error('FAILED...', err);
-      });*/
+      });
   };
 
   useEffect(() => {
